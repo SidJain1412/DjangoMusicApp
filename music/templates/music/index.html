@@ -10,7 +10,7 @@
 		{% for album in all_albums %}
 		<!-- using the variable name we declared in urls.py -->
 		<!-- that was urls.py for music app (name declared in music/urls.py), so we use appname:variable_name -->
-		<li><a href="/{ album.album_id }">{{album.album_title }}</a></li>
+		<li><a href="{% url 'music:favorite' album.id%}">{{album.album_title }}</a></li>
 		{% endfor %}
 	</ul>
 </h2>
