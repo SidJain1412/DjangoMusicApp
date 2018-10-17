@@ -1,11 +1,30 @@
+<!-- Loading the path to the static files -->
+<!-- Adding CSS basically -->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'music/style.css' %}"/>
+<!-- Using bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+
+<!-- Building a navbar -->
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Logo -->
+		<div class="navbar-header">
+			<a class="navbar-brand" href="{% url 'music:index' %}">MYUSIC</a>
+		</div>
+	</div>
+</nav>
+
+
+
 <title>
 	Albums
 </title>
 {% if all_albums %}
-<h1>
+<h2>
 	Here are all your albums:
-</h1>
-<h2>	
+</h2>
+<h3>	
 	<ul>
 		{% for album in all_albums %}
 		<!-- using the variable name we declared in urls.py -->
@@ -13,7 +32,7 @@
 		<li><a href="{% url 'music:favorite' album.id%}">{{album.album_title }}</a></li>
 		{% endfor %}
 	</ul>
-</h2>
+</h3>
 
 {%else%}
 	<h3>You don't have any albums</h3>

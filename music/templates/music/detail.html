@@ -1,6 +1,13 @@
 <title>
 	{{album.album_title}}
 </title>
+<basefont style="font-family:helvetica;">
+<head>
+	<h3 style="font-family:helvetica;">
+		<a href="{% url 'index' %}"><strong>Back to Homepage</strong></a>
+	</h3>
+</head>
+<br>
 <img src="{{album.album_logo}}",height=200, width=200>
 
 <h1>
@@ -20,17 +27,18 @@
 	{% csrf_token %}
 
 	{% for song in album.song_set.all %}
-		<!-- making radio buttons -->
+		<!-- making checkbox buttons -->
 		<!-- forloop counter autoincrements -->
-		<input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}"/>
+		<input type="checkbox" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}"/>
 
 		<label for="song{{forloop.counter}}">
 			{{song.song_title}}
 			{% if song.is_favorite %}
 				<img src="http://i.imgur.com/b9b13Rd.png" height=16 width=16/>
+			{% else %}				
 			{% endif %}
 		</label><br>	
 	{% endfor %}
 	<br>
-	<input type="submit" value="Favorite"/>
+	<input type="submit" value="Favorite / Unfavorite"/>
 </form>
