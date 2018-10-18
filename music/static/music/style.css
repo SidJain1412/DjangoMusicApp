@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Fascinate+Inline');
+
 body{
 	background: white url("images/background2.jpg");
+}
+
+.narbar{
+	border-radius: 0;
+}
+
+.navbar-brand{
+	font-family: 'Fascinate+Inline';
 }
