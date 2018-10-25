@@ -1,93 +1,24 @@
-<!-- Loading the path to the static files -->
-<!-- Adding CSS basically -->
-{% load staticfiles %}
-<!-- Using bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-<link href="https://fonts.googleapis.com/css?family=Fascinate+Inline" rel="stylesheet" type='text/css'>
-<link rel="stylesheet" type="text/css" href="{% static 'music/style.css' %}"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-{# Our CSS #}
+{% extends 'music/base.html' %}
 
-<!-- Building a navbar -->
-<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<!-- Logo -->
-		<div class="navbar-header">
-			{# if no space then this button appears as a menu toggle, cool stuff #}
-			{# data target points to the div class below, with id topNavBar, so bootstrap knows to collapse that #}
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-				<a class="navbar-brand" href="{% url 'index' %}">MYUSIC
-					<span class="glyphicon glyphicon-headphones" aria-hidden="true"></span>&nbsp;
-				</a>
-		</div>
-		{# Items, making them collapsible #}
-		<div class="collapse navbar-collapse" id="topNavBar">
-			<ul class="nav navbar-nav">
-				<li class="active">
-					<a href="{%url 'music:index' %}">
-						<span class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp;Albums
-					</a>
-				</li>
-				<li class="">
-					<a href="#">
-						<span class="glyphicon glyphicon-music" aria-hidden="true"></span>&nbsp;Songs
-					</a>
-				</li>
-				<li class="">
-					<a href="https://www.github.com/sidjain1412" target="_blank">
-						<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Github
-					</a>
-				</li>
-			</ul>
-			<form class="navbar-form navbar-left" role="search" method="get" action="#">
-				<div class="form-group">
-					<input type="text" class="form-control" name="q" value="">
-				</div>
-				<button type="submit" class="btn btn-default">Search</button>
-			</form>
+{% block body %}
+	<title>
+		Albums
+	</title>
+	{% if all_albums %}
+	<h2>
+		Here are all your albums:
+	</h2>
+	<h3>	
+		<ul>
+			{% for album in all_albums %}
+			<!-- using the variable name we declared in urls.py -->
+			<!-- that was urls.py for music app (name declared in music/urls.py), so we use appname:variable_name -->
+			<li><a href="{% url 'music:detail' album.id%}">{{album.album_title }}</a></li>
+			{% endfor %}
+		</ul>
+	</h3>
 
-			<ul class="nav navbar-nav navbar-right">
-				<li class="">
-					<a href="#">
-						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Album
-					</a>
-				</li>
-				<li class="">
-					<a href="#">
-						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;Logout
-					</a>
-				</li>
-			</ul>
-
-
-		</div>
-	</div>
-</nav>
-
-
-
-<title>
-	Albums
-</title>
-{% if all_albums %}
-<h2>
-	Here are all your albums:
-</h2>
-<h3>	
-	<ul>
-		{% for album in all_albums %}
-		<!-- using the variable name we declared in urls.py -->
-		<!-- that was urls.py for music app (name declared in music/urls.py), so we use appname:variable_name -->
-		<li><a href="{% url 'music:favorite' album.id%}">{{album.album_title }}</a></li>
-		{% endfor %}
-	</ul>
-</h3>
-
-{%else%}
-	<h3>You don't have any albums</h3>
-{%endif%}
+	{%else%}
+		<h3>You don't have any albums</h3>
+	{%endif%}
+{%endblock%}

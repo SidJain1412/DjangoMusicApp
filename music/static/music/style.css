@@ -4,10 +4,10 @@ body{
 	background: white url("images/background2.jpg");
 }
 
-.narbar{
+.navbar{
 	border-radius: 0;
 }
 
 .navbar-brand{
-	font-family: 'Fascinate+Inline';
+	font-family: 'Satisfy', cursive;
 }
